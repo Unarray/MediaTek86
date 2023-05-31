@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MediaTek86.view.manage
 {
-    public partial class Manage : Form
+    public partial class Manager : Form
     {
-        public Manage()
+        public Manager()
         {
             InitializeComponent();
         }
