@@ -1,5 +1,5 @@
 ﻿
-namespace MediaTek86.view.manage
+namespace MediaTek86.view.manager
 {
     partial class Manager
     {
@@ -112,7 +112,6 @@ namespace MediaTek86.view.manage
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(654, 314);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // surname
             // 
@@ -228,6 +227,7 @@ namespace MediaTek86.view.manage
             this.ClientSize = new System.Drawing.Size(1001, 392);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Manager";
             this.Text = "Gestion du personnel";
             this.groupBox1.ResumeLayout(false);
