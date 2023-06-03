@@ -89,6 +89,7 @@ namespace MediaTek86.view
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "Se connecter";
             this.ResumeLayout(false);

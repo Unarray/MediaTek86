@@ -228,6 +228,7 @@ namespace MediaTek86.view.manager
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Manager";
             this.Text = "Gestion du personnel";
             this.groupBox1.ResumeLayout(false);

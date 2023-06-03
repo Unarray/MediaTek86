@@ -136,6 +136,7 @@ namespace MediaTek86.view.manager
             this.Controls.Add(this.lblSurname);
             this.Controls.Add(this.txtSurname);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "PersonnelDataInput";
             this.ResumeLayout(false);
             this.PerformLayout();
