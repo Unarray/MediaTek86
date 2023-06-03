@@ -42,7 +42,7 @@ namespace MediaTek86.view
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(189, 23);
             this.button1.TabIndex = 9;
-            this.button1.Text = "valider";
+            this.button1.Text = "Se connecter";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // label2
