@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MediaTek86.model
 {
-    class Personnel
+    public class Personnel
     {
-        public Personnel(int id, int serviceId, string nom, string prenom, string tel, string mail)
+        public Personnel(int id, Service service, string nom, string prenom, string tel, string mail)
         {
             this.id = id;
-            this.serviceId = serviceId;
+            this.service = service;
             this.nom = nom;
             this.prenom = prenom;
             this.tel = tel;
@@ -19,7 +19,7 @@ namespace MediaTek86.model
         }
 
         public int id { get;  }
-        public int serviceId { get; set; }
+        public Service service { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
         public string tel { get; set; }

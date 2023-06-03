@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaTek86.model
 {
-    class Absence
+    public class Absence
     {
         public Absence(Personnel personnel, DateTime dateDebut, DateTime dateFin, Motif motif) {
             this.personnel = personnel;

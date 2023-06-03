@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaTek86.model
 {
-    class Motif
+    public class Motif
     {
         public Motif(int id, string libelle)
         {
