@@ -80,9 +80,10 @@ namespace MediaTek86.bddManager
         /// <param name="stringQuery">requête</param>
         /// <param name="parameters">dictoinnaire contenant les parametres</param>
         /// <returns>liste de tableaux d'objets contenant les valeurs des colonnes</returns>
-        public List<Object[]> ReqSelect(string stringQuery, Dictionary<string, object> parameters = null)
+        public List<Dictionary<string, object>> ReqSelect(string stringQuery, Dictionary<string, object> parameters = null)
         {
             MySqlCommand command = new MySqlCommand(stringQuery, connection);
+
             if (!(parameters is null))
             {
                 foreach (KeyValuePair<string, object> parameter in parameters)
@@ -90,17 +91,28 @@ namespace MediaTek86.bddManager
                     command.Parameters.Add(new MySqlParameter(parameter.Key, parameter.Value));
                 }
             }
+
             command.Prepare();
+
             MySqlDataReader reader = command.ExecuteReader();
-            int nbCols = reader.FieldCount;
-            List<Object[]> records = new List<object[]>();
+            List<Dictionary<string, object>> records = new List<Dictionary<string, object>>();
+
             while (reader.Read())
             {
-                Object[] attributs = new Object[nbCols];
-                reader.GetValues(attributs);
-                records.Add(attributs);
+                Dictionary<string, object> row = new Dictionary<string, object>();
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    string columnName = reader.GetName(i);
+                    object value = reader.GetValue(i);
+                    row[columnName] = value;
+                }
+
+                records.Add(row);
             }
+
             reader.Close();
+
             return records;
         }
 
