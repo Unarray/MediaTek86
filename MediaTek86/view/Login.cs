@@ -28,11 +28,7 @@ namespace MediaTek86.view
             string login = txtLogin.Text;
             string pwd = txtPassword.Text;
 
-            if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(pwd))
-            {
-                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
-                return;
-            }
+            if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(pwd)) return;
 
             if(!authController.isAuthValid(login, pwd))
             {
