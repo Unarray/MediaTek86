@@ -61,5 +61,25 @@ namespace MediaTek86.dal
 
             return personnels;
         }
+
+        public void DeletePersonnel(int personnelId)
+        {
+            if (access == null) return;
+
+            string req = "DELETE FROM personnel WHERE IDPERSONNEL=@id";
+            Dictionary<string, object> parameters = new Dictionary<string, object> {
+                {"@id", personnelId }
+            };
+
+            try
+            {
+                access.Manager.ReqUpdate(req, parameters);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Environment.Exit(0);
+            }
+        }
     }
 }
