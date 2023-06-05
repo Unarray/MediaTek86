@@ -92,6 +92,7 @@ namespace MediaTek86.view
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Se connecter";
             this.ResumeLayout(false);
             this.PerformLayout();
