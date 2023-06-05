@@ -31,5 +31,10 @@ namespace MediaTek86.controller
         {
             personnelAccess.CreatePersonnel(personnel);
         }
+
+        public void UdpatePersonnel(Personnel personnel)
+        {
+            personnelAccess.UpdatePersonnel(personnel);
+        }
     }
 }
