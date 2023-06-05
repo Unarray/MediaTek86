@@ -10,7 +10,7 @@ namespace MediaTek86.dal
     class PersonnelAccess
     {
         private readonly Access access = null;
-        
+
         public PersonnelAccess()
         {
             access = Access.GetInstance();
@@ -38,7 +38,7 @@ namespace MediaTek86.dal
             {
                 List<Dictionary<string, object>> records = access.Manager.ReqSelect(req);
 
-                foreach(Dictionary<string, object> row in records)
+                foreach (Dictionary<string, object> row in records)
                 {
                     personnels.Add(new Personnel(
                         (int)row["IDPERSONNEL"],
@@ -130,4 +130,5 @@ namespace MediaTek86.dal
                 Environment.Exit(0);
             }
         }
+    }
 }
