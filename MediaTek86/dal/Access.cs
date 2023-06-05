@@ -13,7 +13,7 @@ namespace MediaTek86.dal
         /// <summary>
         /// nom de connexion à la bdd
         /// </summary>
-        private static readonly string connectionString = "server=localhost;user id=root;database=mlr1;";
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["mlr1"].ConnectionString;
         /// <summary>
         /// instance unique de la classe
         /// </summary>
@@ -33,7 +33,7 @@ namespace MediaTek86.dal
             {
                 Manager = BddManager.GetInstance(connectionString);
             }
-            catch (Exception e)
+            catch 
             {
                 Environment.Exit(0);
             }
@@ -51,6 +51,5 @@ namespace MediaTek86.dal
             }
             return instance;
         }
-
     }
 }
