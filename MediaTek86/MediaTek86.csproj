@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bddManager\BddManager.cs" />
+    <Compile Include="controller\AbsenceController.cs" />
     <Compile Include="controller\AuthController.cs" />
     <Compile Include="controller\PersonnelController.cs" />
+    <Compile Include="dal\AbsenceAccess.cs" />
     <Compile Include="dal\Access.cs" />
     <Compile Include="dal\PersonnelAccess.cs" />
     <Compile Include="dal\ResponsableAccess.cs" />

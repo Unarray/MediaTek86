@@ -16,17 +16,20 @@ namespace MediaTek86.view.manager
     {
 
         private readonly PersonnelController personnelController;
+        private readonly AbsenceController absenceController;
 
         public Manager()
         {
             personnelController = new PersonnelController();
+            absenceController = new AbsenceController();
             InitializeComponent();
 
+            //// PERSONNEL DATAGRID
             List<Personnel> personnels = personnelController.GetPersonnels();
             dataGridPersonnel.AutoGenerateColumns = false;
             dataGridPersonnel.DataSource = personnels;
 
-            // Créer les colonnes
+            // Création des colonnes
             DataGridViewTextBoxColumn nomColumn = new DataGridViewTextBoxColumn();
             nomColumn.DataPropertyName = "nom";
             nomColumn.HeaderText = "Nom";
@@ -47,13 +50,38 @@ namespace MediaTek86.view.manager
             serviceColumn.DataPropertyName = "service.nom";
             serviceColumn.HeaderText = "Service";
 
-            // Ajouter les colonnes au DataGridView
+            // Ajout des colonnes au DataGridView `dataGridPersonnel`
             dataGridPersonnel.Columns.AddRange(nomColumn, prenomColumn, telColumn, mailColumn, serviceColumn);
+
+
+            Console.WriteLine("MMMMH");
+            //// ABSENCE DATAGRID
+            List<Absence> absences = absenceController.GetAbsences(personnels.First().id);
+            Console.WriteLine("MMMMH");
+            dataGridAbsence.AutoGenerateColumns = false;
+            dataGridAbsence.DataSource = absences;
+
+            // Création des colonnes
+            DataGridViewTextBoxColumn debutColumn = new DataGridViewTextBoxColumn();
+            debutColumn.DataPropertyName = "dateDebut.dateString";
+            debutColumn.HeaderText = "Date début";
+
+            DataGridViewTextBoxColumn finColumn = new DataGridViewTextBoxColumn();
+            finColumn.DataPropertyName = "dateFin.dateString";
+            finColumn.HeaderText = "Date fin";
+
+            DataGridViewTextBoxColumn motifColumn = new DataGridViewTextBoxColumn();
+            motifColumn.DataPropertyName = "motif.libelle";
+            motifColumn.HeaderText = "Motif";
+
+            // Ajout des colonnes au DataGridView `dataGridPersonnel`
+            dataGridAbsence.Columns.AddRange(debutColumn, finColumn, motifColumn);
         }
 
         private void dataGridPersonnel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            Personnel personnel = (Personnel)dataGridPersonnel.Rows[e.RowIndex].DataBoundItem;
+            dataGridAbsence.DataSource = absenceController.GetAbsences(personnel.id);
         }
 
         private void dataGridPersonnel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -67,6 +95,30 @@ namespace MediaTek86.view.manager
                 for (int i = 0; i < properties.Length && data != null; i++)
                     data = data.GetType().GetProperty(properties[i]).GetValue(data);
                 dataGridPersonnel.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
+            }
+        }
+
+        private void dataGridAbsence_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = dataGridAbsence.Columns[e.ColumnIndex];
+            if (column.DataPropertyName.Contains("."))
+            {
+                object data;
+
+                if (column.DataPropertyName.EndsWith(".dateString"))
+                {
+                    data = dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
+                    string propertie = column.DataPropertyName.Split('.')[0];
+                    DateTime date = (DateTime)data.GetType().GetProperty(propertie).GetValue(data);
+                    dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = date.ToString("MM/dd/yyyy HH:mm");
+                    return;
+                }
+
+                data = dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
+                string[] properties = column.DataPropertyName.Split('.');
+                for (int i = 0; i < properties.Length && data != null; i++)
+                    data = data.GetType().GetProperty(properties[i]).GetValue(data);
+                dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
             }
         }
     }

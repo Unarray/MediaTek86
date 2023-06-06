@@ -36,13 +36,13 @@ namespace MediaTek86.view.manager
             this.dataGridPersonnel = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridAbsence = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonnel)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAbsence)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -105,7 +105,7 @@ namespace MediaTek86.view.manager
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Controls.Add(this.dataGridAbsence);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Location = new System.Drawing.Point(684, 12);
@@ -124,20 +124,21 @@ namespace MediaTek86.view.manager
             this.button4.Text = "supprimer";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // dataGridAbsence
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(289, 313);
-            this.dataGridView2.TabIndex = 0;
+            this.dataGridAbsence.AllowUserToAddRows = false;
+            this.dataGridAbsence.AllowUserToDeleteRows = false;
+            this.dataGridAbsence.AllowUserToOrderColumns = true;
+            this.dataGridAbsence.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridAbsence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAbsence.Location = new System.Drawing.Point(7, 20);
+            this.dataGridAbsence.MultiSelect = false;
+            this.dataGridAbsence.Name = "dataGridAbsence";
+            this.dataGridAbsence.ReadOnly = true;
+            this.dataGridAbsence.RowHeadersVisible = false;
+            this.dataGridAbsence.Size = new System.Drawing.Size(289, 313);
+            this.dataGridAbsence.TabIndex = 0;
+            this.dataGridAbsence.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridAbsence_CellFormatting);
             // 
             // button5
             // 
@@ -172,7 +173,7 @@ namespace MediaTek86.view.manager
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonnel)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAbsence)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,7 +186,7 @@ namespace MediaTek86.view.manager
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridAbsence;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
