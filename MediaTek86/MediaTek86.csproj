@@ -33,7 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.33.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector NET 8.0.33\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bddManager\BddManager.cs" />
+    <Compile Include="controller\AuthController.cs" />
+    <Compile Include="controller\PersonnelController.cs" />
+    <Compile Include="dal\Access.cs" />
+    <Compile Include="dal\PersonnelAccess.cs" />
+    <Compile Include="dal\ResponsableAccess.cs" />
+    <Compile Include="model\Absence.cs" />
+    <Compile Include="model\Motif.cs" />
+    <Compile Include="model\Personnel.cs" />
+    <Compile Include="model\Service.cs" />
     <Compile Include="view\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +74,18 @@
     </Compile>
     <Compile Include="view\manager\Manager.Designer.cs">
       <DependentUpon>Manager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\manager\NewAbsence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\manager\NewAbsence.Designer.cs">
+      <DependentUpon>NewAbsence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\manager\PersonnelDataInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\manager\PersonnelDataInput.Designer.cs">
+      <DependentUpon>PersonnelDataInput.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +102,9 @@
     <EmbeddedResource Include="view\manager\Manager.resx">
       <DependentUpon>Manager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\manager\PersonnelDataInput.resx">
+      <DependentUpon>PersonnelDataInput.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,5 +118,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

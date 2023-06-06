@@ -33,22 +33,14 @@ namespace MediaTek86.view.manager
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.service = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridPersonnel = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonnel)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +50,7 @@ namespace MediaTek86.view.manager
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataGridPersonnel);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(666, 368);
@@ -93,55 +85,22 @@ namespace MediaTek86.view.manager
             this.button1.Text = "ajouter";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridPersonnel
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.surname,
-            this.name,
-            this.phone,
-            this.email,
-            this.service});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(654, 314);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // surname
-            // 
-            this.surname.HeaderText = "Nom";
-            this.surname.Name = "surname";
-            this.surname.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Prénom";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // phone
-            // 
-            this.phone.HeaderText = "Tel";
-            this.phone.Name = "phone";
-            this.phone.ReadOnly = true;
-            // 
-            // email
-            // 
-            this.email.HeaderText = "E-Mail";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            // 
-            // service
-            // 
-            this.service.HeaderText = "Service";
-            this.service.Name = "service";
-            this.service.ReadOnly = true;
+            this.dataGridPersonnel.AllowUserToAddRows = false;
+            this.dataGridPersonnel.AllowUserToDeleteRows = false;
+            this.dataGridPersonnel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPersonnel.Location = new System.Drawing.Point(6, 19);
+            this.dataGridPersonnel.MultiSelect = false;
+            this.dataGridPersonnel.Name = "dataGridPersonnel";
+            this.dataGridPersonnel.ReadOnly = true;
+            this.dataGridPersonnel.RowHeadersVisible = false;
+            this.dataGridPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridPersonnel.Size = new System.Drawing.Size(654, 314);
+            this.dataGridPersonnel.TabIndex = 0;
+            this.dataGridPersonnel.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPersonnel_CellContentClick);
+            this.dataGridPersonnel.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPersonnel_CellFormatting);
             // 
             // groupBox2
             // 
@@ -172,10 +131,6 @@ namespace MediaTek86.view.manager
             this.dataGridView2.AllowUserToOrderColumns = true;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.start,
-            this.end,
-            this.reason});
             this.dataGridView2.Location = new System.Drawing.Point(7, 20);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
@@ -183,24 +138,6 @@ namespace MediaTek86.view.manager
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.Size = new System.Drawing.Size(289, 313);
             this.dataGridView2.TabIndex = 0;
-            // 
-            // start
-            // 
-            this.start.HeaderText = "Début";
-            this.start.Name = "start";
-            this.start.ReadOnly = true;
-            // 
-            // end
-            // 
-            this.end.HeaderText = "Fin";
-            this.end.Name = "end";
-            this.end.ReadOnly = true;
-            // 
-            // reason
-            // 
-            this.reason.HeaderText = "Raison";
-            this.reason.Name = "reason";
-            this.reason.ReadOnly = true;
             // 
             // button5
             // 
@@ -233,7 +170,7 @@ namespace MediaTek86.view.manager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion du personnel";
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonnel)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
@@ -243,20 +180,12 @@ namespace MediaTek86.view.manager
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridPersonnel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn service;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start;
-        private System.Windows.Forms.DataGridViewTextBoxColumn end;
-        private System.Windows.Forms.DataGridViewTextBoxColumn reason;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
