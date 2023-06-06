@@ -62,6 +62,57 @@ namespace MediaTek86.dal
             return personnels;
         }
 
+        public Personnel GetPersonnel(int personnelId)
+        {
+            if (access == null) return null;
+
+            string req = @"SELECT
+                personnel.IDPERSONNEL,
+                personnel.NOM,
+                personnel.PRENOM,
+                personnel.TEL,
+                personnel.MAIL,
+                service.IDSERVICE,
+                service.NOM AS NOMSERVICE
+            FROM
+                personnel
+            INNER JOIN service ON service.IDSERVICE = personnel.IDSERVICE
+            WHERE personnel.IDPERSONNEL = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object> {
+                {"@id", personnelId }
+            };
+            Personnel personnel = null;
+
+            try
+            {
+                List<Dictionary<string, object>> results = access.Manager.ReqSelect(req, parameters);
+
+                if (results.Count > 0)
+                {
+                    Dictionary<string, object> row = results.First();
+
+                    personnel = new Personnel(
+                        (int)row["IDPERSONNEL"],
+                        new Service(
+                            (int)row["IDSERVICE"],
+                            (string)row["NOMSERVICE"]
+                        ),
+                        (string)row["NOM"],
+                        (string)row["PRENOM"],
+                        (string)row["TEL"],
+                        (string)row["MAIL"]
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Environment.Exit(0);
+            }
+
+            return personnel;
+        }
+
         public void DeletePersonnel(int personnelId)
         {
             if (access == null) return;
