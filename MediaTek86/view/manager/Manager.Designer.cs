@@ -99,8 +99,8 @@ namespace MediaTek86.view.manager
             this.dataGridPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridPersonnel.Size = new System.Drawing.Size(654, 314);
             this.dataGridPersonnel.TabIndex = 0;
-            this.dataGridPersonnel.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPersonnel_CellContentClick);
             this.dataGridPersonnel.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPersonnel_CellFormatting);
+            this.dataGridPersonnel.SelectionChanged += new System.EventHandler(this.dataGridPersonnel_SelectionChanged);
             // 
             // groupBox2
             // 

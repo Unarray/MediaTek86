@@ -54,10 +54,8 @@ namespace MediaTek86.view.manager
             dataGridPersonnel.Columns.AddRange(nomColumn, prenomColumn, telColumn, mailColumn, serviceColumn);
 
 
-            Console.WriteLine("MMMMH");
             //// ABSENCE DATAGRID
             List<Absence> absences = absenceController.GetAbsences(personnels.First().id);
-            Console.WriteLine("MMMMH");
             dataGridAbsence.AutoGenerateColumns = false;
             dataGridAbsence.DataSource = absences;
 
@@ -78,9 +76,9 @@ namespace MediaTek86.view.manager
             dataGridAbsence.Columns.AddRange(debutColumn, finColumn, motifColumn);
         }
 
-        private void dataGridPersonnel_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridPersonnel_SelectionChanged(object sender, EventArgs e)
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.Rows[e.RowIndex].DataBoundItem;
+            Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
             dataGridAbsence.DataSource = absenceController.GetAbsences(personnel.id);
         }
 
@@ -121,5 +119,7 @@ namespace MediaTek86.view.manager
                 dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
             }
         }
+
+        
     }
 }
