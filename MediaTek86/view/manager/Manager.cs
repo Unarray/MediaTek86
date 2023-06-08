@@ -158,5 +158,13 @@ namespace MediaTek86.view.manager
             personnelController.DeletePersonnels(personnel.id);
             this.refreshPersonnelData();
         }
+
+        private void btnAddAbsence_Click(object sender, EventArgs e)
+        {
+            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            AbsenceDataInput absenceData = new AbsenceDataInput(personnel);
+
+            if (absenceData.ShowDialog() != DialogResult.OK) return;
+        }
     }
 }

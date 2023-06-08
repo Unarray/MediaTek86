@@ -160,6 +160,7 @@ namespace MediaTek86.view.manager
             this.btnAddAbsence.TabIndex = 4;
             this.btnAddAbsence.Text = "ajouter";
             this.btnAddAbsence.UseVisualStyleBackColor = true;
+            this.btnAddAbsence.Click += new System.EventHandler(this.btnAddAbsence_Click);
             // 
             // Manager
             // 

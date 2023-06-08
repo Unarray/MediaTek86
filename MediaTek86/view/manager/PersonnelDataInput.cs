@@ -17,8 +17,8 @@ namespace MediaTek86.view.manager
 
         const int defaultId = 0;
 
-        public Personnel personnel { get; set; }
         private int id = defaultId;
+        public Personnel personnel { get; set; }
         private readonly ServiceController serviceController;
 
         public PersonnelDataInput(Personnel personnel = null)
