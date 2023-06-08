@@ -129,22 +129,14 @@ namespace MediaTek86.dal
                 {"@motif", absence.motif.id}
             };
 
-            try
-            {
-                access.Manager.ReqUpdate(req, parameters);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Environment.Exit(0);
-            }
+            access.Manager.ReqUpdate(req, parameters);
         }
 
         public void UpdateAbsence(Absence absence)
         {
             if (access == null) return;
 
-            string req = "UPDATE personnel SET DATEFIN=@fin, IDMOTIF=@motif WHERE IDPERSONNEL=@id AND DATEDEBUT=@debut";
+            string req = "UPDATE absence SET DATEFIN=@fin, IDMOTIF=@motif WHERE IDPERSONNEL=@id AND DATEDEBUT=@debut";
             Dictionary<string, object> parameters = new Dictionary<string, object> {
                 {"@id", absence.personnel.id},
                 {"@debut", absence.dateDebut},

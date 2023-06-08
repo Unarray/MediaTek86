@@ -54,11 +54,15 @@
     <Compile Include="bddManager\BddManager.cs" />
     <Compile Include="controller\AbsenceController.cs" />
     <Compile Include="controller\AuthController.cs" />
+    <Compile Include="controller\MotifController.cs" />
     <Compile Include="controller\PersonnelController.cs" />
+    <Compile Include="controller\ServiceController.cs" />
     <Compile Include="dal\AbsenceAccess.cs" />
     <Compile Include="dal\Access.cs" />
+    <Compile Include="dal\MotifAccess.cs" />
     <Compile Include="dal\PersonnelAccess.cs" />
     <Compile Include="dal\ResponsableAccess.cs" />
+    <Compile Include="dal\ServiceAccess.cs" />
     <Compile Include="model\Absence.cs" />
     <Compile Include="model\Motif.cs" />
     <Compile Include="model\Personnel.cs" />
@@ -77,11 +81,11 @@
     <Compile Include="view\manager\Manager.Designer.cs">
       <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\manager\NewAbsence.cs">
+    <Compile Include="view\manager\AbsenceDataInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\manager\NewAbsence.Designer.cs">
-      <DependentUpon>NewAbsence.cs</DependentUpon>
+    <Compile Include="view\manager\AbsenceDataInput.Designer.cs">
+      <DependentUpon>AbsenceDataInput.cs</DependentUpon>
     </Compile>
     <Compile Include="view\manager\PersonnelDataInput.cs">
       <SubType>Form</SubType>
@@ -100,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="view\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\manager\AbsenceDataInput.resx">
+      <DependentUpon>AbsenceDataInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\manager\Manager.resx">
       <DependentUpon>Manager.cs</DependentUpon>
