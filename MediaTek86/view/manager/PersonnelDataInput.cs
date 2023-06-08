@@ -16,16 +16,26 @@ namespace MediaTek86.view.manager
     {
         const int defaultId = 0;
 
-        public readonly Personnel oldPersonnel;
+        /// <summary>
+        /// Personnel object generate with value passed in inputs
+        /// </summary>
         public Personnel personnel { get; set; }
+        /// <summary>
+        /// Base Personnel passed in constructor
+        /// </summary>
+        public readonly Personnel oldPersonnel;
         private readonly ServiceController serviceController;
 
+        /// <summary>
+        /// Constructor of PersonnelDataInput
+        /// </summary>
+        /// <param name="personnel">Fill inputs with thit datas</param>
         public PersonnelDataInput(Personnel personnel = null)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.oldPersonnel = personnel;
-            serviceController = new ServiceController();
+            this.serviceController = new ServiceController();
             List<Service> services = serviceController.GetServices();
             this.ddService.DataSource = services;
             this.ddService.DisplayMember = "nom";
@@ -44,6 +54,11 @@ namespace MediaTek86.view.manager
             }
         }
 
+        /// <summary>
+        /// Triggered when validation button is pushed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAccept_Click(object sender, EventArgs e)
         {
             string surname = txtSurname.Text;
@@ -54,7 +69,7 @@ namespace MediaTek86.view.manager
 
             if (String.IsNullOrEmpty(surname) || String.IsNullOrEmpty(name) || String.IsNullOrEmpty(tel) || String.IsNullOrEmpty(mail) || service == null) return;
 
-            int id = defaultId;
+            int id = PersonnelDataInput.defaultId;
             
             if(this.oldPersonnel != null)
             {
@@ -66,10 +81,10 @@ namespace MediaTek86.view.manager
                     return;
                 }
 
-                id = oldPersonnel.id;
+                id = this.oldPersonnel.id;
             }
 
-            personnel = new Personnel(
+            this.personnel = new Personnel(
                 id,
                 service,
                 surname,

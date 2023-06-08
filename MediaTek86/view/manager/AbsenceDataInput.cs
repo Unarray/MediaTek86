@@ -12,20 +12,34 @@ using MediaTek86.model;
 
 namespace MediaTek86.view.manager
 {
+    /// <summary>
+    /// Create a form to insert Absence datas
+    /// </summary>
     public partial class AbsenceDataInput : Form
     {
+        /// <summary>
+        /// Absence object from inputs
+        /// </summary>
         public Absence absence { get; set; }
-        private Personnel personnel;
+        /// <summary>
+        /// Base Absence passed in constructor
+        /// </summary>
         public Absence oldAbsence;
+        private readonly Personnel personnel;
         private readonly MotifController motifController;
 
+        /// <summary>
+        /// Constructor of AbsenceDataInput
+        /// </summary>
+        /// <param name="personnel">Personnel relative to this absence</param>
+        /// <param name="absence">Absence object ot pre-fill inputs</param>
         public AbsenceDataInput(Personnel personnel, Absence absence = null)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.oldAbsence = absence;
             this.personnel = personnel;
-            motifController = new MotifController();
+            this.motifController = new MotifController();
             List<Motif> motifs = motifController.GetMotifs();
             this.ddReason.DataSource = motifs;
             this.ddReason.DisplayMember = "libelle";
@@ -45,6 +59,11 @@ namespace MediaTek86.view.manager
             }
         }
 
+        /// <summary>
+        /// Triggered when validation btn is pushed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAccept_Click(object sender, EventArgs e)
         {
             DateTime start = this.dateStart.Value;
@@ -70,7 +89,7 @@ namespace MediaTek86.view.manager
                 }
             }
 
-            absence = new Absence(
+            this.absence = new Absence(
                 personnel,
                 start,
                 end,
