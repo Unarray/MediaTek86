@@ -80,14 +80,14 @@ Comme je l'ai dit notre application sera sous le model MVC, ainsi notre applicat
 ```
 
 Je commence d'abord par designer la fenêtre de connexion: 
-![[Pasted image 20230608225041.png]]
+![Pasted image 20230608225041.png](./meta/Pasted%20image%2020230608225041.png)
 
 Une fois cette rapide étape passé, je m'attaque au design du corp de l'application
-![[Pasted image 20230608225130.png]]
+![Pasted image 20230608225130.png](./meta/Pasted%20image%2020230608225130.png)
 
 Je crée ensuite les différents formulaires pour ajouter/modifier le personnel et les absences
-![[Pasted image 20230608225205.png]]
-![[Pasted image 20230608225211.png]]
+![Pasted image 20230608225205.png](./meta/Pasted%20image%2020230608225205.png)
+![Pasted image 20230608225211.png](./meta/Pasted%20image%2020230608225211.png)
 
 ```
 .
