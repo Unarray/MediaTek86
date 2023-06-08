@@ -21,5 +21,25 @@ namespace MediaTek86.controller
         {
             return absenceAccess.GetAbsences(personnelId);
         }
+
+        public void DeleteAbsence(int personnelId, DateTime date)
+        {
+            absenceAccess.DeleteAbsence(personnelId, date);
+        }
+
+        public void DeleteAllAbsences(int personnelId)
+        {
+            absenceAccess.DeleteAllAbsences(personnelId);
+        }
+
+        public void CreateAbsence(Absence absence)
+        {
+            absenceAccess.CreateAbsence(absence);
+        }
+
+        public void UpdateAbsence(Absence absence)
+        {
+            absenceAccess.UpdateAbsence(absence);
+        }
     }
 }
