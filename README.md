@@ -5,6 +5,7 @@ Le PDF De présentation est le même que ce README.md que vous êtes entrain de 
 - [Présentatoin](./MediaTek86/presentation.pdf)
 - [Portfolio](https://ethanmonjal.me/)
 - [Portfolio (dev)](https://dev.ethanmonjal.me/)
+- [Téléchargements](./exe/)
 
 
 ---
