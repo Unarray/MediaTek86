@@ -202,6 +202,7 @@ namespace MediaTek86.view.manager
             Personnel personnel = (Personnel)this.dataGridPersonnel.SelectedRows[0].DataBoundItem;
 
             this.personnelController.DeletePersonnels(personnel.id);
+            this.absenceController.DeleteAllAbsences(personnel.id);
             this.refreshPersonnelData();
         }
 
