@@ -14,10 +14,9 @@ namespace MediaTek86.view.manager
 {
     public partial class PersonnelDataInput : Form
     {
-
         const int defaultId = 0;
 
-        private int id = defaultId;
+        public readonly Personnel oldPersonnel;
         public Personnel personnel { get; set; }
         private readonly ServiceController serviceController;
 
@@ -25,6 +24,7 @@ namespace MediaTek86.view.manager
         {
             InitializeComponent();
 
+            this.oldPersonnel = personnel;
             serviceController = new ServiceController();
             List<Service> services = serviceController.GetServices();
             this.ddService.DataSource = services;
@@ -33,7 +33,6 @@ namespace MediaTek86.view.manager
 
             if (personnel is Personnel){
                 this.Text = "Modifier un membre du personnel";
-                this.id = personnel.id;
                 this.txtSurname.Text = personnel.nom;
                 this.txtName.Text = personnel.prenom;
                 this.txtPhone.Text = personnel.tel;
@@ -54,7 +53,10 @@ namespace MediaTek86.view.manager
             Service service = (Service)this.ddService.SelectedItem;
 
             if (String.IsNullOrEmpty(surname) || String.IsNullOrEmpty(name) || String.IsNullOrEmpty(tel) || String.IsNullOrEmpty(mail) || service == null) return;
-            if(this.id != defaultId)
+
+            int id = defaultId;
+            
+            if(this.oldPersonnel != null)
             {
                 DialogResult confirm = MessageBox.Show("Êtes-vous sûr de vouloir modifier cette personne ?", "Modifier cette utilisateur ?", MessageBoxButtons.YesNo);
 
@@ -63,10 +65,12 @@ namespace MediaTek86.view.manager
                     this.Close();
                     return;
                 }
+
+                id = oldPersonnel.id;
             }
 
             personnel = new Personnel(
-                this.id,
+                id,
                 service,
                 surname,
                 name,
