@@ -37,18 +37,18 @@ namespace MediaTek86.view.manager
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
             this.txtPhone = new System.Windows.Forms.TextBox();
-            this.accept = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.ddService = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtSurname
             // 
-            this.txtSurname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSurname.Location = new System.Drawing.Point(14, 27);
             this.txtSurname.MaxLength = 50;
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(119, 20);
             this.txtSurname.TabIndex = 0;
-            this.txtSurname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lblSurname
             // 
@@ -58,7 +58,6 @@ namespace MediaTek86.view.manager
             this.lblSurname.Size = new System.Drawing.Size(29, 13);
             this.lblSurname.TabIndex = 1;
             this.lblSurname.Text = "Nom";
-            this.lblSurname.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblName
             // 
@@ -111,22 +110,41 @@ namespace MediaTek86.view.manager
             this.txtPhone.Size = new System.Drawing.Size(119, 20);
             this.txtPhone.TabIndex = 3;
             // 
-            // accept
+            // btnAccept
             // 
-            this.accept.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.accept.Location = new System.Drawing.Point(264, 79);
-            this.accept.Name = "accept";
-            this.accept.Size = new System.Drawing.Size(119, 20);
-            this.accept.TabIndex = 5;
-            this.accept.Text = "valider";
-            this.accept.UseVisualStyleBackColor = true;
+            this.btnAccept.Location = new System.Drawing.Point(14, 114);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(119, 20);
+            this.btnAccept.TabIndex = 6;
+            this.btnAccept.Text = "valider";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            // 
+            // ddService
+            // 
+            this.ddService.FormattingEnabled = true;
+            this.ddService.Location = new System.Drawing.Point(264, 78);
+            this.ddService.Name = "ddService";
+            this.ddService.Size = new System.Drawing.Size(119, 21);
+            this.ddService.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(264, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Service";
             // 
             // PersonnelDataInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 111);
-            this.Controls.Add(this.accept);
+            this.ClientSize = new System.Drawing.Size(401, 145);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ddService);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.lblEmail);
@@ -138,6 +156,7 @@ namespace MediaTek86.view.manager
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PersonnelDataInput";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,6 +172,8 @@ namespace MediaTek86.view.manager
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.Button accept;
+        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.ComboBox ddService;
+        private System.Windows.Forms.Label label1;
     }
 }

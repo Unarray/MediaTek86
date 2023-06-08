@@ -30,15 +30,15 @@ namespace MediaTek86.view.manager
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDeletePersonnel = new System.Windows.Forms.Button();
+            this.btnEditPersonnel = new System.Windows.Forms.Button();
+            this.btnAddPersonnel = new System.Windows.Forms.Button();
             this.dataGridPersonnel = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnRemoveAbsence = new System.Windows.Forms.Button();
             this.dataGridAbsence = new System.Windows.Forms.DataGridView();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnEditAbsence = new System.Windows.Forms.Button();
+            this.btnAddAbsence = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonnel)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -47,9 +47,9 @@ namespace MediaTek86.view.manager
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnDeletePersonnel);
+            this.groupBox1.Controls.Add(this.btnEditPersonnel);
+            this.groupBox1.Controls.Add(this.btnAddPersonnel);
             this.groupBox1.Controls.Add(this.dataGridPersonnel);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -58,32 +58,35 @@ namespace MediaTek86.view.manager
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Personnel";
             // 
-            // button3
+            // btnDeletePersonnel
             // 
-            this.button3.Location = new System.Drawing.Point(167, 339);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "supprimer";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDeletePersonnel.Location = new System.Drawing.Point(167, 339);
+            this.btnDeletePersonnel.Name = "btnDeletePersonnel";
+            this.btnDeletePersonnel.Size = new System.Drawing.Size(75, 23);
+            this.btnDeletePersonnel.TabIndex = 3;
+            this.btnDeletePersonnel.Text = "supprimer";
+            this.btnDeletePersonnel.UseVisualStyleBackColor = true;
+            this.btnDeletePersonnel.Click += new System.EventHandler(this.btnDeletePersonnel_Click);
             // 
-            // button2
+            // btnEditPersonnel
             // 
-            this.button2.Location = new System.Drawing.Point(86, 339);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "modifier";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEditPersonnel.Location = new System.Drawing.Point(86, 339);
+            this.btnEditPersonnel.Name = "btnEditPersonnel";
+            this.btnEditPersonnel.Size = new System.Drawing.Size(75, 23);
+            this.btnEditPersonnel.TabIndex = 2;
+            this.btnEditPersonnel.Text = "modifier";
+            this.btnEditPersonnel.UseVisualStyleBackColor = true;
+            this.btnEditPersonnel.Click += new System.EventHandler(this.btnEditPersonnel_Click);
             // 
-            // button1
+            // btnAddPersonnel
             // 
-            this.button1.Location = new System.Drawing.Point(5, 339);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "ajouter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddPersonnel.Location = new System.Drawing.Point(5, 339);
+            this.btnAddPersonnel.Name = "btnAddPersonnel";
+            this.btnAddPersonnel.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPersonnel.TabIndex = 1;
+            this.btnAddPersonnel.Text = "ajouter";
+            this.btnAddPersonnel.UseVisualStyleBackColor = true;
+            this.btnAddPersonnel.Click += new System.EventHandler(this.btnAddPersonnel_Click);
             // 
             // dataGridPersonnel
             // 
@@ -104,10 +107,10 @@ namespace MediaTek86.view.manager
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.btnRemoveAbsence);
             this.groupBox2.Controls.Add(this.dataGridAbsence);
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.btnEditAbsence);
+            this.groupBox2.Controls.Add(this.btnAddAbsence);
             this.groupBox2.Location = new System.Drawing.Point(684, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(302, 368);
@@ -115,14 +118,14 @@ namespace MediaTek86.view.manager
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Absences";
             // 
-            // button4
+            // btnRemoveAbsence
             // 
-            this.button4.Location = new System.Drawing.Point(168, 339);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "supprimer";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnRemoveAbsence.Location = new System.Drawing.Point(168, 339);
+            this.btnRemoveAbsence.Name = "btnRemoveAbsence";
+            this.btnRemoveAbsence.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveAbsence.TabIndex = 6;
+            this.btnRemoveAbsence.Text = "supprimer";
+            this.btnRemoveAbsence.UseVisualStyleBackColor = true;
             // 
             // dataGridAbsence
             // 
@@ -140,23 +143,23 @@ namespace MediaTek86.view.manager
             this.dataGridAbsence.TabIndex = 0;
             this.dataGridAbsence.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridAbsence_CellFormatting);
             // 
-            // button5
+            // btnEditAbsence
             // 
-            this.button5.Location = new System.Drawing.Point(87, 339);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "modifier";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnEditAbsence.Location = new System.Drawing.Point(87, 339);
+            this.btnEditAbsence.Name = "btnEditAbsence";
+            this.btnEditAbsence.Size = new System.Drawing.Size(75, 23);
+            this.btnEditAbsence.TabIndex = 5;
+            this.btnEditAbsence.Text = "modifier";
+            this.btnEditAbsence.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnAddAbsence
             // 
-            this.button6.Location = new System.Drawing.Point(6, 339);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "ajouter";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnAddAbsence.Location = new System.Drawing.Point(6, 339);
+            this.btnAddAbsence.Name = "btnAddAbsence";
+            this.btnAddAbsence.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAbsence.TabIndex = 4;
+            this.btnAddAbsence.Text = "ajouter";
+            this.btnAddAbsence.UseVisualStyleBackColor = true;
             // 
             // Manager
             // 
@@ -183,12 +186,12 @@ namespace MediaTek86.view.manager
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridPersonnel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDeletePersonnel;
+        private System.Windows.Forms.Button btnEditPersonnel;
+        private System.Windows.Forms.Button btnAddPersonnel;
         private System.Windows.Forms.DataGridView dataGridAbsence;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnRemoveAbsence;
+        private System.Windows.Forms.Button btnEditAbsence;
+        private System.Windows.Forms.Button btnAddAbsence;
     }
 }

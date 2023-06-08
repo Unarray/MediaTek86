@@ -76,6 +76,13 @@ namespace MediaTek86.view.manager
             dataGridAbsence.Columns.AddRange(debutColumn, finColumn, motifColumn);
         }
 
+        // Refresh content of the personnel data grid
+        private void refreshPersonnelData()
+        {
+            List<Personnel> personnels = personnelController.GetPersonnels();
+            dataGridPersonnel.DataSource = personnels;
+        }
+
         private void dataGridPersonnel_SelectionChanged(object sender, EventArgs e)
         {
             Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
@@ -120,6 +127,36 @@ namespace MediaTek86.view.manager
             }
         }
 
-        
+        private void btnAddPersonnel_Click(object sender, EventArgs e)
+        {
+            PersonnelDataInput personnelData = new PersonnelDataInput();
+
+            if (personnelData.ShowDialog() == DialogResult.Cancel) return;
+
+            personnelController.CreatePersonnel(personnelData.personnel);
+            this.refreshPersonnelData();
+        }
+
+        private void btnEditPersonnel_Click(object sender, EventArgs e)
+        {
+            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            PersonnelDataInput personnelData = new PersonnelDataInput(personnel);
+
+            if (personnelData.ShowDialog() != DialogResult.OK) return;
+
+            personnelController.UdpatePersonnel(personnelData.personnel);
+            this.refreshPersonnelData();
+        }
+
+        private void btnDeletePersonnel_Click(object sender, EventArgs e)
+        {
+            DialogResult confirm = MessageBox.Show("Êtes-vous sur de vouloir supprimer cette personne ?", "Supprimer un personnel", MessageBoxButtons.YesNo);
+
+            if (confirm != DialogResult.Yes) return;
+
+            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            personnelController.DeletePersonnels(personnel.id);
+            this.refreshPersonnelData();
+        }
     }
 }
