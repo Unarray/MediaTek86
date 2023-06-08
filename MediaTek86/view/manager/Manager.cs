@@ -18,14 +18,17 @@ namespace MediaTek86.view.manager
         private readonly PersonnelController personnelController;
         private readonly AbsenceController absenceController;
 
+        /// <summary>
+        /// Manager form constructor
+        /// </summary>
         public Manager()
         {
-            personnelController = new PersonnelController();
-            absenceController = new AbsenceController();
-            InitializeComponent();
+            this.personnelController = new PersonnelController();
+            this.absenceController = new AbsenceController();
+            this.InitializeComponent();
 
             //// PERSONNEL DATAGRID
-            dataGridPersonnel.AutoGenerateColumns = false;
+            this.dataGridPersonnel.AutoGenerateColumns = false;
             this.refreshPersonnelData();
 
             // Création des colonnes
@@ -55,10 +58,11 @@ namespace MediaTek86.view.manager
             serviceColumn.HeaderText = "Service";
 
             // Ajout des colonnes au DataGridView `dataGridPersonnel`
-            dataGridPersonnel.Columns.AddRange(nomColumn, prenomColumn, telColumn, mailColumn, serviceColumn);
+            this.dataGridPersonnel.Columns.AddRange(nomColumn, prenomColumn, telColumn, mailColumn, serviceColumn);
+
 
             //// ABSENCE DATAGRID
-            dataGridAbsence.AutoGenerateColumns = false;
+            this.dataGridAbsence.AutoGenerateColumns = false;
 
             // Création des colonnes
             DataGridViewTextBoxColumn debutColumn = new DataGridViewTextBoxColumn();
@@ -77,116 +81,145 @@ namespace MediaTek86.view.manager
             motifColumn.HeaderText = "Motif";
 
             // Ajout des colonnes au DataGridView `dataGridPersonnel`
-            dataGridAbsence.Columns.AddRange(debutColumn, finColumn, motifColumn);
+            this.dataGridAbsence.Columns.AddRange(debutColumn, finColumn, motifColumn);
         }
 
         // Refresh content of the personnel data grid
         private void refreshPersonnelData()
         {
-            List<Personnel> personnels = personnelController.GetPersonnels();
+            List<Personnel> personnels = this.personnelController.GetPersonnels();
 
             personnels.Sort((x, y) => x.nom.CompareTo(y.nom));
 
-            dataGridPersonnel.DataSource = personnels;
+            this.dataGridPersonnel.DataSource = personnels;
         }
 
         private void refreshAbsenceData()
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
-            List<Absence> absences = absenceController.GetAbsences(personnel.id);
+            Personnel personnel = (Personnel)this.dataGridPersonnel.CurrentRow.DataBoundItem;
+            List<Absence> absences = this.absenceController.GetAbsences(personnel.id);
 
             absences.Sort((x, y) => x.dateDebut.CompareTo(y.dateDebut));
 
-            dataGridAbsence.DataSource = absences;
+            this.dataGridAbsence.DataSource = absences;
         }
 
         private void dataGridPersonnel_SelectionChanged(object sender, EventArgs e)
         {
             this.refreshAbsenceData();
-           // Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
-           // dataGridAbsence.DataSource = absenceController.GetAbsences(personnel.id);
         }
 
+        /// <summary>
+        /// Format cell permit to render property of object property for dataGridPersonnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridPersonnel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Get values from child object
-            DataGridViewColumn column = dataGridPersonnel.Columns[e.ColumnIndex];
+            DataGridViewColumn column = this.dataGridPersonnel.Columns[e.ColumnIndex];
             if (column.DataPropertyName.Contains("."))
             {
-                object data = dataGridPersonnel.Rows[e.RowIndex].DataBoundItem;
+                object data = this.dataGridPersonnel.Rows[e.RowIndex].DataBoundItem;
                 string[] properties = column.DataPropertyName.Split('.');
                 for (int i = 0; i < properties.Length && data != null; i++)
                     data = data.GetType().GetProperty(properties[i]).GetValue(data);
-                dataGridPersonnel.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
+                this.dataGridPersonnel.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
             }
         }
 
+        /// <summary>
+        /// Format cell permit to render property of object property for dataGridAbsence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridAbsence_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            DataGridViewColumn column = dataGridAbsence.Columns[e.ColumnIndex];
+            DataGridViewColumn column = this.dataGridAbsence.Columns[e.ColumnIndex];
             if (column.DataPropertyName.Contains("."))
             {
                 object data;
-
+                // Render a dates
                 if (column.DataPropertyName.EndsWith(".dateString"))
                 {
-                    data = dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
+                    data = this.dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
                     string propertie = column.DataPropertyName.Split('.')[0];
                     DateTime date = (DateTime)data.GetType().GetProperty(propertie).GetValue(data);
-                    dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = date.ToString("dd/MM/yyyy HH:mm:ss");
+                    this.dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = date.ToString("dd/MM/yyyy HH:mm:ss");
                     return;
                 }
 
-                data = dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
+                data = this.dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
                 string[] properties = column.DataPropertyName.Split('.');
                 for (int i = 0; i < properties.Length && data != null; i++)
                     data = data.GetType().GetProperty(properties[i]).GetValue(data);
-                dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
+                this.dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = data;
             }
         }
 
+        /// <summary>
+        /// Add personnel to DB & dataGridPersonnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddPersonnel_Click(object sender, EventArgs e)
         {
             PersonnelDataInput personnelData = new PersonnelDataInput();
 
             if (personnelData.ShowDialog() == DialogResult.Cancel) return;
 
-            personnelController.CreatePersonnel(personnelData.personnel);
+            this.personnelController.CreatePersonnel(personnelData.personnel);
             this.refreshPersonnelData();
         }
 
+        /// <summary>
+        /// Edit personnel from DB & dataGridPersonnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditPersonnel_Click(object sender, EventArgs e)
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            Personnel personnel = (Personnel)this.dataGridPersonnel.SelectedRows[0].DataBoundItem;
             PersonnelDataInput personnelData = new PersonnelDataInput(personnel);
 
             if (personnelData.ShowDialog() != DialogResult.OK) return;
 
-            personnelController.UdpatePersonnel(personnelData.personnel);
+            this.personnelController.UdpatePersonnel(personnelData.personnel);
             this.refreshPersonnelData();
         }
 
+        /// <summary>
+        /// Delete personnel from DB & dataGridPersonnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeletePersonnel_Click(object sender, EventArgs e)
         {
             DialogResult confirm = MessageBox.Show("Êtes-vous sur de vouloir supprimer cette personne ?", "Supprimer un personnel", MessageBoxButtons.YesNo);
 
             if (confirm != DialogResult.Yes) return;
 
-            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
-            personnelController.DeletePersonnels(personnel.id);
+            Personnel personnel = (Personnel)this.dataGridPersonnel.SelectedRows[0].DataBoundItem;
+
+            this.personnelController.DeletePersonnels(personnel.id);
             this.refreshPersonnelData();
         }
 
+        /// <summary>
+        /// Add absence to DB & dataGridAbsence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddAbsence_Click(object sender, EventArgs e)
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            Personnel personnel = (Personnel)this.dataGridPersonnel.SelectedRows[0].DataBoundItem;
             AbsenceDataInput absenceData = new AbsenceDataInput(personnel);
 
             if (absenceData.ShowDialog() != DialogResult.OK) return;
 
             try
             {
-                absenceController.CreateAbsence(absenceData.absence);
+                this.absenceController.CreateAbsence(absenceData.absence);
             }
             catch
             {
@@ -196,27 +229,33 @@ namespace MediaTek86.view.manager
             this.refreshAbsenceData();
         }
 
+        // Edit absence from DB & dataGridAbsence
         private void btnEditAbsence_Click(object sender, EventArgs e)
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
-            Absence absence = (Absence)dataGridAbsence.SelectedRows[0].DataBoundItem;
+            Personnel personnel = (Personnel)this.dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            Absence absence = (Absence)this.dataGridAbsence.SelectedRows[0].DataBoundItem;
             AbsenceDataInput absenceData = new AbsenceDataInput(personnel, absence);
 
             if (absenceData.ShowDialog() != DialogResult.OK) return;
 
-            absenceController.UpdateAbsence(absenceData.absence);
+            this.absenceController.UpdateAbsence(absenceData.absence);
             this.refreshAbsenceData();
         }
 
+        /// <summary>
+        /// Remove absence from DB & dataGridAbsence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemoveAbsence_Click(object sender, EventArgs e)
         {
             DialogResult confirm = MessageBox.Show("Êtes-vous sur de vouloir supprimer cette absence ?", "Supprimer une absence", MessageBoxButtons.YesNo);
             
             if (confirm != DialogResult.Yes) return;
             
-            Absence absence = (Absence)dataGridAbsence.SelectedRows[0].DataBoundItem;
+            Absence absence = (Absence)this.dataGridAbsence.SelectedRows[0].DataBoundItem;
 
-            absenceController.DeleteAbsence(absence.personnel.id, absence.dateDebut);
+            this.absenceController.DeleteAbsence(absence.personnel.id, absence.dateDebut);
             this.refreshAbsenceData();
         }
     }

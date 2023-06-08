@@ -17,20 +17,28 @@ namespace MediaTek86.view
 
         private readonly AuthController authController;
 
+       /// <summary>
+       /// Login form constructor
+       /// </summary>
         public Login()
         {
-            InitializeComponent();
-            authController = new AuthController();
+            this.InitializeComponent();
+            this.authController = new AuthController();
         }
 
+        /// <summary>
+        /// OnClick event on connect button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text;
-            string pwd = txtPassword.Text;
+            string login = this.txtLogin.Text;
+            string pwd = this.txtPassword.Text;
 
             if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(pwd)) return;
 
-            if(!authController.isAuthValid(login, pwd))
+            if(!this.authController.isAuthValid(login, pwd))
             {
                 MessageBox.Show("Authentification incorrecte", "Alerte");
                 return;
@@ -41,8 +49,7 @@ namespace MediaTek86.view
             Manager managerForm = new Manager();
 
             managerForm.ShowDialog();
-
-            txtPassword.Text = "";
+            this.txtPassword.Text = "";
 
             this.Show();
         }   
