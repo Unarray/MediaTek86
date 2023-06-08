@@ -76,11 +76,32 @@ namespace MediaTek86.dal
             return absences;
         }
 
-        public void DeletePersonnel(int personnelId)
+        public void DeleteAbsence(int personnelId, DateTime start)
         {
             if (access == null) return;
 
-            string req = "DELETE FROM personnel WHERE IDPERSONNEL=@id";
+            string req = "DELETE FROM absence WHERE IDPERSONNEL=@id AND DATEDEBUT=@date;";
+            Dictionary<string, object> parameters = new Dictionary<string, object> {
+                {"@id", personnelId },
+                {"@date", start }
+            };
+
+            try
+            {
+                access.Manager.ReqUpdate(req, parameters);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Environment.Exit(0);
+            }
+        }
+
+        public void DeleteAllAbsences(int personnelId)
+        {
+            if (access == null) return;
+
+            string req = "DELETE FROM absence WHERE IDPERSONNEL=@id;";
             Dictionary<string, object> parameters = new Dictionary<string, object> {
                 {"@id", personnelId }
             };
@@ -96,17 +117,16 @@ namespace MediaTek86.dal
             }
         }
 
-        public void CreatePersonnel(Personnel personnel)
+        public void CreateAbsence(Absence absence)
         {
             if (access == null) return;
 
-            string req = "INSERT INTO personnel (NOM, PRENOM, TEL, MAIL, IDSERVICE) VALUES (@nom, @prenom, @tel, @mail, @idservice)";
+            string req = "INSERT INTO absence (IDPERSONNEL, DATEDEBUT, DATEFIN, IDMOTIF) VALUES (@id, @debut, @fin, @motif)";
             Dictionary<string, object> parameters = new Dictionary<string, object> {
-                {"@nom", personnel.nom},
-                {"@prenom", personnel.prenom},
-                {"@tel", personnel.tel},
-                {"@mail", personnel.mail},
-                {"@idservice", personnel.service.id}
+                {"@id", absence.personnel.id},
+                {"@debut", absence.dateDebut},
+                {"@fin", absence.dateFin},
+                {"@motif", absence.motif.id}
             };
 
             try
@@ -120,18 +140,16 @@ namespace MediaTek86.dal
             }
         }
 
-        public void UpdatePersonnel(Personnel personnel)
+        public void UpdateAbsence(Absence absence)
         {
             if (access == null) return;
 
-            string req = "UPDATE personnel SET NOM=@nom, PRENOM=@prenom, TEL=@tel, MAIL=@mail, IDSERVICE=@idservice WHERE IDPERSONNEL=@id";
+            string req = "UPDATE personnel SET DATEFIN=@fin, IDMOTIF=@motif WHERE IDPERSONNEL=@id AND DATEDEBUT=@debut";
             Dictionary<string, object> parameters = new Dictionary<string, object> {
-                {"@id", personnel.id},
-                {"@nom", personnel.nom},
-                {"@prenom", personnel.prenom},
-                {"@tel", personnel.tel},
-                {"@mail", personnel.mail},
-                {"@idservice", personnel.service.id}
+                {"@id", absence.personnel.id},
+                {"@debut", absence.dateDebut},
+                {"@fin", absence.dateFin},
+                {"@motif", absence.motif.id}
             };
 
             try
