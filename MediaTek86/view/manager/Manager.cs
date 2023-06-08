@@ -25,50 +25,54 @@ namespace MediaTek86.view.manager
             InitializeComponent();
 
             //// PERSONNEL DATAGRID
-            List<Personnel> personnels = personnelController.GetPersonnels();
             dataGridPersonnel.AutoGenerateColumns = false;
-            dataGridPersonnel.DataSource = personnels;
+            this.refreshPersonnelData();
 
             // Création des colonnes
             DataGridViewTextBoxColumn nomColumn = new DataGridViewTextBoxColumn();
+            nomColumn.Name = "surname";
             nomColumn.DataPropertyName = "nom";
             nomColumn.HeaderText = "Nom";
 
             DataGridViewTextBoxColumn prenomColumn = new DataGridViewTextBoxColumn();
+            prenomColumn.Name = "name";
             prenomColumn.DataPropertyName = "prenom";
             prenomColumn.HeaderText = "Prénom";
 
             DataGridViewTextBoxColumn telColumn = new DataGridViewTextBoxColumn();
+            telColumn.Name = "phone";
             telColumn.DataPropertyName = "tel";
             telColumn.HeaderText = "Téléphone";
 
             DataGridViewTextBoxColumn mailColumn = new DataGridViewTextBoxColumn();
+            mailColumn.Name = "email";
             mailColumn.DataPropertyName = "mail";
             mailColumn.HeaderText = "Email";
 
             DataGridViewTextBoxColumn serviceColumn = new DataGridViewTextBoxColumn();
+            serviceColumn.Name = "serviceName";
             serviceColumn.DataPropertyName = "service.nom";
             serviceColumn.HeaderText = "Service";
 
             // Ajout des colonnes au DataGridView `dataGridPersonnel`
             dataGridPersonnel.Columns.AddRange(nomColumn, prenomColumn, telColumn, mailColumn, serviceColumn);
 
-
             //// ABSENCE DATAGRID
-            List<Absence> absences = absenceController.GetAbsences(personnels.First().id);
             dataGridAbsence.AutoGenerateColumns = false;
-            dataGridAbsence.DataSource = absences;
 
             // Création des colonnes
             DataGridViewTextBoxColumn debutColumn = new DataGridViewTextBoxColumn();
+            debutColumn.Name = "dateStart";
             debutColumn.DataPropertyName = "dateDebut.dateString";
             debutColumn.HeaderText = "Date début";
 
             DataGridViewTextBoxColumn finColumn = new DataGridViewTextBoxColumn();
+            finColumn.Name = "dateEnd";
             finColumn.DataPropertyName = "dateFin.dateString";
             finColumn.HeaderText = "Date fin";
 
             DataGridViewTextBoxColumn motifColumn = new DataGridViewTextBoxColumn();
+            motifColumn.Name = "reason";
             motifColumn.DataPropertyName = "motif.libelle";
             motifColumn.HeaderText = "Motif";
 
@@ -80,13 +84,27 @@ namespace MediaTek86.view.manager
         private void refreshPersonnelData()
         {
             List<Personnel> personnels = personnelController.GetPersonnels();
+
+            personnels.Sort((x, y) => x.nom.CompareTo(y.nom));
+
             dataGridPersonnel.DataSource = personnels;
+        }
+
+        private void refreshAbsenceData()
+        {
+            Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
+            List<Absence> absences = absenceController.GetAbsences(personnel.id);
+
+            absences.Sort((x, y) => x.dateDebut.CompareTo(y.dateDebut));
+
+            dataGridAbsence.DataSource = absences;
         }
 
         private void dataGridPersonnel_SelectionChanged(object sender, EventArgs e)
         {
-            Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
-            dataGridAbsence.DataSource = absenceController.GetAbsences(personnel.id);
+            this.refreshAbsenceData();
+           // Personnel personnel = (Personnel)dataGridPersonnel.CurrentRow.DataBoundItem;
+           // dataGridAbsence.DataSource = absenceController.GetAbsences(personnel.id);
         }
 
         private void dataGridPersonnel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -115,7 +133,7 @@ namespace MediaTek86.view.manager
                     data = dataGridAbsence.Rows[e.RowIndex].DataBoundItem;
                     string propertie = column.DataPropertyName.Split('.')[0];
                     DateTime date = (DateTime)data.GetType().GetProperty(propertie).GetValue(data);
-                    dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = date.ToString("MM/dd/yyyy HH:mm");
+                    dataGridAbsence.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = date.ToString("dd/MM/yyyy HH:mm:ss");
                     return;
                 }
 
@@ -165,6 +183,41 @@ namespace MediaTek86.view.manager
             AbsenceDataInput absenceData = new AbsenceDataInput(personnel);
 
             if (absenceData.ShowDialog() != DialogResult.OK) return;
+
+            try
+            {
+                absenceController.CreateAbsence(absenceData.absence);
+            }
+            catch
+            {
+                MessageBox.Show("Une erreur est survenue.\nLa date de début est peut-être deja défini pour cet utilisateur", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            this.refreshAbsenceData();
+        }
+
+        private void btnEditAbsence_Click(object sender, EventArgs e)
+        {
+            Personnel personnel = (Personnel)dataGridPersonnel.SelectedRows[0].DataBoundItem;
+            Absence absence = (Absence)dataGridAbsence.SelectedRows[0].DataBoundItem;
+            AbsenceDataInput absenceData = new AbsenceDataInput(personnel, absence);
+
+            if (absenceData.ShowDialog() != DialogResult.OK) return;
+
+            absenceController.UpdateAbsence(absenceData.absence);
+            this.refreshAbsenceData();
+        }
+
+        private void btnRemoveAbsence_Click(object sender, EventArgs e)
+        {
+            DialogResult confirm = MessageBox.Show("Êtes-vous sur de vouloir supprimer cette absence ?", "Supprimer une absence", MessageBoxButtons.YesNo);
+            
+            if (confirm != DialogResult.Yes) return;
+            
+            Absence absence = (Absence)dataGridAbsence.SelectedRows[0].DataBoundItem;
+
+            absenceController.DeleteAbsence(absence.personnel.id, absence.dateDebut);
+            this.refreshAbsenceData();
         }
     }
 }

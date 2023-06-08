@@ -126,6 +126,7 @@ namespace MediaTek86.view.manager
             this.btnRemoveAbsence.TabIndex = 6;
             this.btnRemoveAbsence.Text = "supprimer";
             this.btnRemoveAbsence.UseVisualStyleBackColor = true;
+            this.btnRemoveAbsence.Click += new System.EventHandler(this.btnRemoveAbsence_Click);
             // 
             // dataGridAbsence
             // 
@@ -139,6 +140,7 @@ namespace MediaTek86.view.manager
             this.dataGridAbsence.Name = "dataGridAbsence";
             this.dataGridAbsence.ReadOnly = true;
             this.dataGridAbsence.RowHeadersVisible = false;
+            this.dataGridAbsence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridAbsence.Size = new System.Drawing.Size(289, 313);
             this.dataGridAbsence.TabIndex = 0;
             this.dataGridAbsence.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridAbsence_CellFormatting);
@@ -151,6 +153,7 @@ namespace MediaTek86.view.manager
             this.btnEditAbsence.TabIndex = 5;
             this.btnEditAbsence.Text = "modifier";
             this.btnEditAbsence.UseVisualStyleBackColor = true;
+            this.btnEditAbsence.Click += new System.EventHandler(this.btnEditAbsence_Click);
             // 
             // btnAddAbsence
             // 

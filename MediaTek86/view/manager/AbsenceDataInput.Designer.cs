@@ -40,6 +40,8 @@ namespace MediaTek86.view.manager
             // 
             // dateStart
             // 
+            this.dateStart.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateStart.Location = new System.Drawing.Point(12, 31);
             this.dateStart.Name = "dateStart";
             this.dateStart.Size = new System.Drawing.Size(200, 20);
@@ -65,6 +67,8 @@ namespace MediaTek86.view.manager
             // 
             // dateEnd
             // 
+            this.dateEnd.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateEnd.Location = new System.Drawing.Point(218, 31);
             this.dateEnd.Name = "dateEnd";
             this.dateEnd.Size = new System.Drawing.Size(200, 20);
@@ -109,8 +113,10 @@ namespace MediaTek86.view.manager
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.dateStart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AbsenceDataInput";
-            this.Text = "NewAbsence";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
